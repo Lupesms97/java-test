@@ -1,6 +1,9 @@
 package com.product.api.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,31 +11,24 @@ import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-import com.product.api.model.Category;
-import org.springframework.boot.context.properties.bind.Name;
 
-@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Product {
+@Data
+public class Category {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private Long id;
     private String name;
-    private String description;
-    private double price;
-    private int amount;
-    @ManyToOne
-    private Category category;
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
-        return getId() == product.getId();
+        if (!(o instanceof Category category)) return false;
+        return Objects.equals(getId(), category.getId());
     }
 
     @Override
